@@ -405,6 +405,14 @@ export async function POST({ request, locals, params, getClientAddress }) {
 				convId
 			);
 
+			console.log(processedMessages.slice(-1)[0].content);
+			update({
+				type: "webSearch",
+				messageType: "update",
+				message: "Generated prompt",
+				args: [processedMessages.slice(-1)[0].content],
+			});
+
 			const previousText = messageToWriteTo.content;
 
 			let hasError = false;
