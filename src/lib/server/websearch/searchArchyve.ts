@@ -18,7 +18,12 @@ export async function searchArchyve(query: string) {
 		},
 		signal: abortController.signal,
 	})
-		.then((response) => response.json() as Promise<{ hits: { url: string; distance: number }[] }>)
+		.then(
+			(response) =>
+				response.json() as Promise<{
+					hits: { url: string; browser_url: string; distance: number }[];
+				}>
+		)
 		.catch((error) => {
 			console.error("Failed to fetch or parse JSON", error);
 			throw new Error("Failed to fetch or parse JSON");
@@ -30,7 +35,7 @@ export async function searchArchyve(query: string) {
 	const hits = jsonResponse.hits.slice(0, 10);
 
 	const results: { link: string }[] = hits.map((hit) => {
-		return { link: hit.url };
+		return { link: hit.url, browserLink: hit.browser_url };
 	});
 
 	return { organic_results: results };

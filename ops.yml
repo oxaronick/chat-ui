@@ -1,0 +1,12 @@
+dependencies:
+  docker:
+    - deps
+  custom:
+    - npm install
+forwards:
+  deps: deps
+actions:
+  server:
+    command: npm run dev
+    load_secrets: true
+  library: rackup -p 8192

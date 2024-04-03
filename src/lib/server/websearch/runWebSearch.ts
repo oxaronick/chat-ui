@@ -96,16 +96,20 @@ export async function runWebSearch(
 			const results = await searchWeb(webSearch.searchQuery);
 			webSearch.results =
 				(results.organic_results &&
-					results.organic_results.map((el: { title?: string; link: string; text?: string }) => {
-						try {
-							const { title, link, text } = el;
-							const { hostname } = new URL(link);
-							return { title, link, hostname, text };
-						} catch (e) {
-							// Ignore Errors
-							return null;
+					results.organic_results.map(
+						(el: { title?: string; link: string; browserLink?: string; text?: string }) => {
+							try {
+								console.log("result is ", el);
+								const { title, link, browserLink, text } = el;
+								const { hostname } = new URL(link);
+								console.log("Returning ", { title, link, browserLink, hostname, text });
+								return { title, link, browserLink, hostname, text };
+							} catch (e) {
+								// Ignore Errors
+								return null;
+							}
 						}
-					})) ??
+					)) ??
 				[];
 		}
 
@@ -127,12 +131,14 @@ export async function runWebSearch(
 		if (webSearch.results.length > 0) {
 			appendUpdate("Browsing results");
 			const promises = webSearch.results.map(async (result) => {
+				console.log("RESULT ", result);
 				const { link } = result;
+				const browserLink = result.browserLink ?? link;
 				let text = result.text ?? "";
 				if (!text) {
 					try {
 						text = await webSearch.provider.urlParser(link);
-						appendUpdate("Browsing webpage", [link]);
+						appendUpdate("Browsing webpage", [browserLink]);
 					} catch (e) {
 						appendUpdate("Failed to parse webpage", [(e as Error).message, link], "error");
 						// ignore errors

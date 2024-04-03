@@ -20,6 +20,7 @@ export interface WebSearch extends Timestamps {
 export interface WebSearchSource {
 	title: string;
 	link: string;
+	browserLink?: string;
 	hostname: string;
 	text?: string; // You.com provides text of webpage right away
 }
