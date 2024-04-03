@@ -450,10 +450,12 @@
 							name="ragMode"
 							value={"all"}
 						/>
-						<span class="my-2 text-sm" class:font-semibold={ragMode === "all"}> Web search </span>
+						<span class="my-2 text-sm" class:font-semibold={ragMode === "all"}>
+							Archyve search
+						</span>
 						{#if ragMode === "all"}
 							<span class="block text-xs text-gray-500">
-								Assistant will do a web search on each user request to find information.
+								Assistant will do an Archyve search on each user request to find information.
 							</span>
 						{/if}
 					</label>

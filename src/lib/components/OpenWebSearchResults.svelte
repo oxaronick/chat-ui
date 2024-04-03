@@ -42,7 +42,7 @@
 			<IconInternet classNames="relative fill-current text-xl" />
 		</div>
 		<dl class="leading-4">
-			<dd class="text-sm">Web Search</dd>
+			<dd class="text-sm">Archyve Search</dd>
 			<dt class="flex items-center gap-1 truncate whitespace-nowrap text-[.82rem] text-gray-400">
 				{#if sources}
 					Completed

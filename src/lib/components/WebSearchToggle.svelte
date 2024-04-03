@@ -11,12 +11,12 @@
 	on:click={toggle}
 	on:keydown={toggle}
 	aria-checked={$webSearchParameters.useSearch}
-	aria-label="web search toggle"
+	aria-label="archyve search toggle"
 	role="switch"
 	tabindex="0"
 >
 	<Switch name="useSearch" bind:checked={$webSearchParameters.useSearch} on:click on:keydown />
-	<div class="whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Search web</div>
+	<div class="whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Search Archyve</div>
 	<div class="group relative w-max">
 		<CarbonInformation class="text-xs text-gray-500" />
 		<div
