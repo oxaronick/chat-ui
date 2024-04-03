@@ -7,10 +7,10 @@ export async function searchArchyve(query: string) {
 	setTimeout(() => abortController.abort(), 10000);
 
 	// insert the query into the URL template
-	const url = ARCHYVE_QUERY_URL.replace("<query>", query);
+	const query_url = ARCHYVE_QUERY_URL.replace("<query>", query);
 
 	// search Archyve for relevant documents
-	const jsonResponse = await fetch(url, {
+	const jsonResponse = await fetch(query_url, {
 		headers: {
 			Authorization: `Bearer ${ARCHYVE_API_KEY}`,
 			"X-Client-Id": ARCHYVE_CLIENT_ID,
@@ -34,8 +34,9 @@ export async function searchArchyve(query: string) {
 	}
 	const hits = jsonResponse.hits.slice(0, 10);
 
+	const favicon = new URL(query_url).origin + "/favicon.png";
 	const results: { link: string }[] = hits.map((hit) => {
-		return { link: hit.url, browserLink: hit.browser_url };
+		return { link: hit.url, browserLink: hit.browser_url, favicon };
 	});
 
 	return { organic_results: results };

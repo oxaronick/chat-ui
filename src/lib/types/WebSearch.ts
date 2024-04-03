@@ -21,6 +21,7 @@ export interface WebSearchSource {
 	title: string;
 	link: string;
 	browserLink?: string;
+	favicon?: string;
 	hostname: string;
 	text?: string; // You.com provides text of webpage right away
 }

@@ -227,17 +227,13 @@
 			{#if webSearchSources?.length}
 				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm">
 					<div class="text-gray-400">Sources:</div>
-					{#each webSearchSources as { link, browserLink, title, hostname }}
+					{#each webSearchSources as { link, browserLink, title, hostname, favicon }}
 						<a
 							class="flex items-center gap-2 whitespace-nowrap rounded-lg border bg-white px-2 py-1.5 leading-none hover:border-gray-300 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700"
 							href={browserLink ?? link}
 							target="_blank"
 						>
-							<img
-								class="h-3.5 w-3.5 rounded"
-								src="https://www.google.com/s2/favicons?sz=64&domain_url={hostname}"
-								alt="{title} favicon"
-							/>
+							<img class="h-3.5 w-3.5 rounded" src={favicon} alt="{title} favicon" />
 							<div>{hostname.replace(/^www\./, "")}</div>
 						</a>
 					{/each}

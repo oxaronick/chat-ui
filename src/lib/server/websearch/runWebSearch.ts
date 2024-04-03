@@ -97,13 +97,17 @@ export async function runWebSearch(
 			webSearch.results =
 				(results.organic_results &&
 					results.organic_results.map(
-						(el: { title?: string; link: string; browserLink?: string; text?: string }) => {
+						(el: {
+							title?: string;
+							link: string;
+							browserLink?: string;
+							text?: string;
+							favicon?: string;
+						}) => {
 							try {
-								console.log("result is ", el);
-								const { title, link, browserLink, text } = el;
+								const { title, link, browserLink, text, favicon } = el;
 								const { hostname } = new URL(link);
-								console.log("Returning ", { title, link, browserLink, hostname, text });
-								return { title, link, browserLink, hostname, text };
+								return { title, link, browserLink, hostname, text, favicon };
 							} catch (e) {
 								// Ignore Errors
 								return null;
@@ -131,7 +135,6 @@ export async function runWebSearch(
 		if (webSearch.results.length > 0) {
 			appendUpdate("Browsing results");
 			const promises = webSearch.results.map(async (result) => {
-				console.log("RESULT ", result);
 				const { link } = result;
 				const browserLink = result.browserLink ?? link;
 				let text = result.text ?? "";
