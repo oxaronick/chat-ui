@@ -107,7 +107,11 @@ export async function runWebSearch(
 							try {
 								const { title, link, browserLink, text, favicon } = el;
 								const { hostname } = new URL(link);
-								return { title, link, browserLink, hostname, text, favicon };
+
+								const final_favicon =
+									favicon ?? `https://www.google.com/s2/favicons?sz=64&domain_url=${hostname}`;
+
+								return { title, link, browserLink, hostname, text, favicon: final_favicon };
 							} catch (e) {
 								// Ignore Errors
 								return null;
