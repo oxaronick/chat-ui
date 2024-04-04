@@ -29,15 +29,17 @@ export async function searchArchyve(query: string) {
 			throw new Error("Failed to fetch or parse JSON");
 		});
 
+	console.log("RESPONSE", jsonResponse);
 	if (!jsonResponse.hits.length) {
 		throw new Error(`Response doesn't contain key "hits"`);
 	}
-	const hits = jsonResponse.hits.slice(0, 10);
+	const hits = jsonResponse.hits.slice(0, 10).sort((a, b) => a.distance - b.distance);
 
 	const favicon = new URL(query_url).origin + "/favicon.png";
 	const results: { link: string }[] = hits.map((hit) => {
 		return { link: hit.url, browserLink: hit.browser_url, favicon };
 	});
 
+	console.log("RESULTS", results);
 	return { organic_results: results };
 }
