@@ -36,7 +36,7 @@ export async function searchArchyve(query: string) {
 	}
 	const hits = jsonResponse.hits.slice(0, 10).sort((a, b) => a.distance - b.distance);
 
-	const archyve_url = new URL(ARCHYVE_PUBLIC_ENDPOINT || query_url)
+	const archyve_url = new URL(ARCHYVE_PUBLIC_ENDPOINT || query_url);
 	const favicon = archyve_url.origin + "/favicon.png";
 	const results: { link: string }[] = hits.map((hit) => {
 		return { link: hit.url, browserLink: hit.browser_url, favicon };
